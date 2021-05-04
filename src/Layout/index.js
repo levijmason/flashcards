@@ -27,16 +27,6 @@ function Layout() {
   const signal = abortController.signal;
   const history = useHistory();
 
-  useEffect(() => {
-    getDecks();
-
-    return () => {
-      abortController.abort();
-    };
-
-  }, []);
-
-
   async function getDecks() {
     try {
       const response = await listDecks(signal);
@@ -47,6 +37,17 @@ function Layout() {
       }
     }
   }
+
+
+  useEffect(() => {
+    getDecks();
+
+    return () => {
+      abortController.abort();
+    };
+
+  });
+
 
   /**
    * Posts a deck to the database.
